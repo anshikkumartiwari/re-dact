@@ -24,7 +24,7 @@ This tool is a Flask-based application designed to automatically redact sensitiv
 
 ## Example Frontend
 
-![Frontend Placeholder](https://via.placeholder.com/600x400)
+![Frontend Placeholder](Screenshot_18-9-2024_03151_127.0.0.1.jpeg)
 
 ## Redaction in Action
 
