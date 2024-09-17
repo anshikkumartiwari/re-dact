@@ -29,10 +29,10 @@ This tool is a Flask-based application designed to automatically redact sensitiv
 ## Redaction in Action
 
 **Before Redaction:**
-![Before Placeholder](static\uploads\a102412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred_plates_blurred.jpg)
+![Before Placeholder](static/uploads/AT02412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred.jpg)
 
 **After Redaction:**
-![After Placeholder](static\uploads\AT02412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred.jpg)
+![After Placeholder](static/uploads/a102412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred_plates_blurred.jpg)
 
 ---
 
