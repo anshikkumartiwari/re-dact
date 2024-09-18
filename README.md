@@ -114,7 +114,12 @@ The app will be available at `http://127.0.0.1:5000` in your browser.
 
 Make sure you have [Python 3.8+](https://www.python.org/) installed.
 
-1. digiSignBlur.py:
+
+
+0. digiSignBlur2.py:
+This is based on my custom trained model on my self labeled dataset `https://github.com/anshikkumartiwari/siginature-detection-blur` 
+
+1. digiSignBlur2.py:
 Two modules are assigned to handle signatures one of them is sourced from `https://github.com/ahmetozlu/signature_extractor` with slight modifications.
 
 2. numPlateBlur.py:
