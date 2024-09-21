@@ -7,8 +7,8 @@
 
 
 <p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png" height="40">
-  <img src="https://logowik.com/content/uploads/images/flask3998.jpg" height="40" style="background-color: white;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png" height="60">
+  <img src="https://logowik.com/content/uploads/images/flask3998.jpg" height="60">
 </p>
 
 
