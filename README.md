@@ -13,7 +13,7 @@
 
 ### Multi-file Format Automatic Redaction Tool
 
-This tool is a Flask-based application designed to automatically redact sensitive content from various file formats (.TXT, .JPG, .JPEG, .PNG, .DOCX, .ODT, etc.)
+This is a Flask-based web application designed to automatically detect redact sensitive content from various file formats (.TXT, .JPG, .JPEG, .PNG, .DOCX, .ODT, etc.) without any dependency on external APIs or internet.
 
 ### Features
 
