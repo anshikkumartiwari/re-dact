@@ -2,9 +2,8 @@
 # RE-Dact Tool
 
 ## Authors:
-- [@anshikkumartiwari](https://github.com/anshikkumartiwari)
-- [@yashsharma-007](https://github.com/yashsharma-007)
-
+\- [@anshikkumartiwari](https://github.com/anshikkumartiwari)
+\- [@yashsharma-007](https://github.com/yashsharma-007)
 
 <p>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png" height="60">
