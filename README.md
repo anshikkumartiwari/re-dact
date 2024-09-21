@@ -24,15 +24,13 @@ This tool is a Flask-based application designed to automatically redact sensitiv
 
 ## Example Frontend
 
-![Frontend Placeholder](Screenshot_18-9-2024_03151_127.0.0.1.jpeg)
+![Frontend](Screenshot_18-9-2024_03151_127.0.0.1.jpeg)
+![Frontend](Screenshot_18-9-2024_03051_127.0.0.1.jpeg)
 
 ## Redaction in Action
 
-**Before Redaction:**
-![Before Placeholder](static/uploads/AT02412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred.jpg)
-
-**After Redaction:**
-![After Placeholder](static/uploads/a102412pvamendno15page1_no_metadata_faces_blurred_signatures_blurred_plates_blurred.jpg)
+![Demo image](redact_facecarsign.png)
+Besides this, text contents, image metadata, OCR recognbised text content, nsfw content (build for this one is yet in progress) is also redacted.
 
 ---
 
