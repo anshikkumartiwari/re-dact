@@ -1,17 +1,16 @@
 
 # RE-Dact Tool
+
+##Authors:
+-[@anshikkumartiwari](https://github.com/anshikkumartiwari)
+-[@yashsharma-007](https://github.com/yashsharma-007)
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png" height="40">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/320px-Flask_logo.svg.png" height="40">
+
 ### Multi-file Format Automatic Redaction Tool
 
-![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png)
-![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/320px-Flask_logo.svg.png)
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
-This tool is a Flask-based application designed to automatically redact sensitive content from various file formats. The supported formats include:
-
-- **Text Files (.txt)**
-- **Images (.jpg, .png)**
-- **Documents (.docx)**
-- **PDFs (.pdf)**
+This tool is a Flask-based application designed to automatically redact sensitive content from various file formats (.TXT, .JPG, .JPEG, .PNG, .DOCX, .ODT, etc.)
 
 ### Features
 
@@ -105,6 +104,8 @@ python app.py
 ```
 
 The app will be available at `http://127.0.0.1:5000` in your browser.
+
+You can use the following doxcx file to test all the attributes at once: https://docs.google.com/document/d/1lF5QyNvzsJLfRNGYXkuFtroFSQqbw68gWlmLpK550zA/pub
 
 ---
 
