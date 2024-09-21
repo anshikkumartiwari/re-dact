@@ -1,13 +1,14 @@
 
 # RE-Dact Tool
 
-##Authors:
--[@anshikkumartiwari](https://github.com/anshikkumartiwari)
--[@yashsharma-007](https://github.com/yashsharma-007)
+## Authors:
+- [@anshikkumartiwari](https://github.com/anshikkumartiwari)
+- [@yashsharma-007](https://github.com/yashsharma-007)
+
 
 <p>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/219px-Python-logo.png" height="40">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/320px-Flask_logo.svg.png" height="40" style="background-color: white;">
+  <img src="https://logowik.com/content/uploads/images/flask3998.jpg" height="40" style="background-color: white;">
 </p>
 
 
