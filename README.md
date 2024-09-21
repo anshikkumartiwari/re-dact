@@ -1,7 +1,7 @@
 
 # RE-Dact Tool
 
-## Authors:
+### Authors:
 - [@anshikkumartiwari](https://github.com/anshikkumartiwari)
 - [@yashsharma-007](https://github.com/yashsharma-007)
 
