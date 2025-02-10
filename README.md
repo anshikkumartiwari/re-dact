@@ -21,12 +21,12 @@ This is a Flask-based web application designed to automatically detect redact se
 
 ## Example Frontend
 
-![Frontend](Screenshot1.jpeg)
+![Frontend](Screenshot1.png)
 ![Frontend](Screenshot2.jpeg)
 
 ## Redaction in Action
 
-![Demo image](redact_facecarsign.png)
+![Demo image](redact_facecarsig.png)
 Besides this, text contents, image metadata, OCR recognbised text content, nsfw content (build for this one is yet in progress) is also redacted.
 
 ---
