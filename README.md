@@ -33,7 +33,8 @@ Besides this, text contents, image metadata, OCR recognbised text content, nsfw 
 
 ## Project Directory Structure
 
-bash
+bash 
+```
 re-dact/
 ├── __pycache__/
 ├── datasets/
@@ -76,7 +77,7 @@ re-dact/
 ├── app.py
 ├── pandoc-3.3-windows-x86_64.msi
 └── tempCodeRunnerFile.py
-
+```
 
 ## Installation
 
