@@ -1,42 +1,55 @@
-import spacy
-from spacy.cli import download
-from services.addons.patterns import redact_patterns
-from services.addons.direct import apply_direct_redaction
+import re
 
-MODEL_NAME = "en_core_web_sm"
+def redact_text(file, sensitivity_level):
+    """
+    Redact sensitive information from a text file based on sensitivity level.
+    """
+    # Read the file content
+    text = file.read().decode('utf-8')
+    print("Original Text (before redaction):", text)  # Debug statement
 
+    # Apply redaction
+    redacted_text = apply_direct_redaction(text, sensitivity_level)
+    print("Redacted Text (after redaction):", redacted_text)  # Debug statement
 
-try:
-    nlp = spacy.load(MODEL_NAME)
-except OSError:
-    print(f"Model '{MODEL_NAME}' not found. Downloading now...")
-    download(MODEL_NAME)
-    nlp = spacy.load(MODEL_NAME)
+    return redacted_text
 
-def redact_text(file_content, sensitivity_level):
-    text = file_content.read().decode('utf-8')
-
-    
-    text = apply_direct_redaction(text, sensitivity_level)
-
-    
-    text = redact_patterns(text)
-
-    
-    sensitive_entities = {
-        1: ["PASSWORD", "API_KEY", "CREDIT_CARD"],
-        2: ["PERSON", "ORG", "GPE", "LOC", "ADDRESS", "PHONE", "EMAIL"],
-        3: ["ALL"],  
+def apply_direct_redaction(text, sensitivity_level):
+    """
+    Apply redaction patterns based on sensitivity level.
+    """
+    # Define patterns for each sensitivity level
+    level_1_patterns = {
+        r'(?i)(password:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(api\s?key:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(secret\s?key:?\s*)(.*)': '[REDACTED]',
     }
 
-    doc = nlp(text)
+    level_2_patterns = {
+        r'(?i)(name:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(address:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(registration\s?(no|number):?\s*)(.*)': '[REDACTED]',
+        r'(?i)(phone\s?number:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(email:?\s*)(.*)': '[REDACTED]',
+    }
 
-    redacted_text = ""
-    for token in doc:
-        if token.ent_type_ in sensitive_entities.get(sensitivity_level, []):
-            
-            redacted_text += "[REDACTED]" + (" " if not token.is_space else "\n")
-        else:
-            redacted_text += token.text_with_ws
+    level_3_patterns = {
+        r'(?i)(aadhar\s?(card)?\s?number:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(pan\s?(card)?\s?number:?\s*)(.*)': '[REDACTED]',
+        r'(?i)(vehicle\s?(no|number):?\s*)(.*)': '[REDACTED]',
+        r'(?i)(credit\s?card\s?number:?\s*)(.*)': '[REDACTED]',
+    }
 
-    return redacted_text.strip()
+    all_patterns = {
+        1: level_1_patterns,
+        2: level_2_patterns,
+        3: level_3_patterns,
+    }
+
+    # Apply patterns based on sensitivity level
+    for level in range(1, sensitivity_level + 1):
+        patterns = all_patterns.get(level, {})
+        for pattern, replacement in patterns.items():
+            text = re.sub(pattern, replacement, text)
+
+    return text
