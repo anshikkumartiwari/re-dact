@@ -1,9 +1,10 @@
+
 from docx import Document
 import os
 import tempfile
 
-from services.addons.direct import apply_direct_redaction  # ✅ Uses `apply_direct_redaction`
-from services.img import process_image  # ✅ Uses `process_image`
+from services.addons.direct import apply_direct_redaction  # ✅ Uses apply_direct_redaction
+from services.img import process_image  # ✅ Uses process_image
 
 def process_docx_file(docx_file, sensitivity_level, redact_ocr, redact_meta, redact_face, redact_license_plate, redact_signature, redact_nsfw, is_document):
     """
@@ -16,7 +17,7 @@ def process_docx_file(docx_file, sensitivity_level, redact_ocr, redact_meta, red
     for para in doc.paragraphs:
         original_text = para.text.strip()
         if original_text:
-            redacted_text = apply_direct_redaction(original_text, sensitivity_level)  # ✅ Using `direct.py`
+            redacted_text = apply_direct_redaction(original_text, sensitivity_level)  # ✅ Using direct.py
             para.clear()
             para.add_run(redacted_text)
 
@@ -32,7 +33,7 @@ def process_docx_file(docx_file, sensitivity_level, redact_ocr, redact_meta, red
             with open(image_filename, "wb") as f:
                 f.write(image_data)
 
-            # Process the image using `img.py`
+            # Process the image using img.py
             processed_image = process_image(image_filename, redact_ocr, redact_meta, redact_face, 
                                             redact_license_plate, redact_signature, redact_nsfw, 
                                             is_document, sensitivity_level)
