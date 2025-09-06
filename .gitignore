@@ -2,4 +2,4 @@ __pycache__/
 *.pyc
 tempCodeRunnerFile.py
 *.pt
-static/uplo
+static/uploads/*
