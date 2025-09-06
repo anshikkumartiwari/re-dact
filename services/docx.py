@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from docx import Document
 import os
 import tempfile
@@ -23,6 +24,32 @@ def process_docx_file(docx_file, redact_ocr, redact_meta, redact_face, redact_li
             para.add_run(redacted_text)
 
     # 2. Handling IMAGE Redaction
+=======
+
+from docx import Document
+import os
+import tempfile
+
+from services.addons.direct import apply_direct_redaction  # ✅ Uses apply_direct_redaction
+from services.img import process_image  # ✅ Uses process_image
+
+def process_docx_file(docx_file, sensitivity_level, redact_ocr, redact_meta, redact_face, redact_license_plate, redact_signature, redact_nsfw, is_document):
+    """
+    Process a .docx file by redacting text and blurring images.
+    """
+    doc = Document(docx_file)
+    upload_folder = 'static/uploads'
+
+    ### 🔴 1. Fixing TEXT Redaction ###
+    for para in doc.paragraphs:
+        original_text = para.text.strip()
+        if original_text:
+            redacted_text = apply_direct_redaction(original_text, sensitivity_level)  # ✅ Using direct.py
+            para.clear()
+            para.add_run(redacted_text)
+
+    ### 🔵 2. Handling IMAGE Redaction ###
+>>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
     image_replacements = {}
 
     for rel in doc.part.rels.values():
@@ -35,16 +62,23 @@ def process_docx_file(docx_file, redact_ocr, redact_meta, redact_face, redact_li
                 f.write(image_data)
 
             # Process the image using img.py
+<<<<<<< HEAD
             processed_image, region_info = process_image(
                 image_filename, redact_ocr, redact_meta, redact_face, 
                 redact_license_plate, redact_signature, redact_nsfw, 
                 is_document
             )
+=======
+            processed_image = process_image(image_filename, redact_ocr, redact_meta, redact_face, 
+                                            redact_license_plate, redact_signature, redact_nsfw, 
+                                            is_document, sensitivity_level)
+>>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
 
             # Store the processed image for later replacement
             with open(processed_image, "rb") as img_file:
                 image_replacements[rel.target_ref] = img_file.read()
 
+<<<<<<< HEAD
             # Add detection info to log
             for region in region_info:
                 detection_log.append({
@@ -53,11 +87,14 @@ def process_docx_file(docx_file, redact_ocr, redact_meta, redact_face, redact_li
                     "category": region["category"]
                 })
 
+=======
+>>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
     # Replace original images with processed images
     for rel in doc.part.rels.values():
         if rel.target_ref in image_replacements:
             rel.target_part._blob = image_replacements[rel.target_ref]
 
+<<<<<<< HEAD
     # 3. Save the Redacted Document
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.docx')
     doc.save(temp_file.name)
@@ -130,4 +167,10 @@ def decrypt_docx_file(docx_path, json_path, secret_key):
     # Save decrypted DOCX
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.docx')
     doc.save(temp_file.name)
+=======
+    ### 🟢 3. Save the Redacted Document ###
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.docx')
+    doc.save(temp_file.name)
+
+>>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
     return temp_file.name

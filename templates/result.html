@@ -53,11 +53,14 @@
                     <a href="{{ url_for('download_file', filename=docx_file_path) }}" class="download-btn">
                         <i class="fas fa-download"></i> Download Redacted DOCX File
                     </a>
+<<<<<<< HEAD
                     {# Add download button for JSON log #}
                     {% set json_filename = original_file.split('/')[-1].split('\\')[-1].replace('.docx', '.json') %}
                     <a href="{{ url_for('download_file', filename='static/uploads/' + json_filename) }}" class="download-btn" style="margin-top:10px;">
                         <i class="fas fa-download"></i> Download Detection Log (JSON)
                     </a>
+=======
+>>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
                 {% elif pdf_file_path %}
                     <h3>Redacted PDF File:</h3>
                     <a href="{{ url_for('download_file', filename=pdf_file_path) }}" class="download-btn">
