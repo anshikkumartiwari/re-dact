@@ -4,11 +4,7 @@ import os
 from services.txt import redact_text
 from services.img import process_image
 
-<<<<<<< HEAD
 def process_pdf_file(file):
-=======
-def process_pdf_file(file, sensitivity_level):
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
     """
     Process a PDF file: redact text, process images, and return the path to the redacted file.
     """
@@ -28,11 +24,7 @@ def process_pdf_file(file, sensitivity_level):
             text = page.get_text("text")
 
             
-<<<<<<< HEAD
             redacted_text = redact_text(text.encode('utf-8')).decode('utf-8')
-=======
-            redacted_text = redact_text(text.encode('utf-8'), sensitivity_level).decode('utf-8')
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
 
             
             redacted_page = redacted_pdf.new_page(width=page.rect.width, height=page.rect.height)
