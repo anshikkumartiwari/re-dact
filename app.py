@@ -102,30 +102,48 @@ def download_file(filename):
 @app.route('/decrypt', methods=['POST'])
 def decrypt_file():
     """
-    Handle decryption of redacted DOCX using uploaded JSON and secret key.
+    Handle decryption of redacted DOCX or image files using uploaded JSON and secret key.
     """
-    docx_file = request.files.get('docx_file')
+    encrypted_file = request.files.get('encrypted_file')
     json_file = request.files.get('json_file')
     secret_key = request.form.get('secret_key')
 
-    if not docx_file or not json_file or not secret_key:
+    if not encrypted_file or not json_file or not secret_key:
         return 'All fields are required.'
 
     # Save uploaded files
     upload_folder = app.config['UPLOAD_FOLDER']
     os.makedirs(upload_folder, exist_ok=True)
-    docx_filename = secure_filename(docx_file.filename)
+    encrypted_filename = secure_filename(encrypted_file.filename)
     json_filename = secure_filename(json_file.filename)
-    docx_path = os.path.join(upload_folder, docx_filename)
+    encrypted_path = os.path.join(upload_folder, encrypted_filename)
     json_path = os.path.join(upload_folder, json_filename)
-    docx_file.save(docx_path)
+    encrypted_file.save(encrypted_path)
     json_file.save(json_path)
 
-    # Call decryption logic in docx.py
-    from services.docx import decrypt_docx_file
-    decrypted_docx_path = decrypt_docx_file(docx_path, json_path, secret_key)
-
-    return render_template('result.html', docx_file_path=decrypted_docx_path, original_file=docx_path)
+    # Determine file type and call appropriate decryption logic
+    file_ext = os.path.splitext(encrypted_filename)[1].lower()
+    
+    if file_ext == '.docx':
+        # Call decryption logic in docx.py
+        from services.docx import decrypt_docx_file
+        decrypted_file_path = decrypt_docx_file(encrypted_path, json_path, secret_key)
+        return render_template('result.html', 
+                             decrypted_docx_path=decrypted_file_path, 
+                             original_file=encrypted_path,
+                             is_decrypted=True)
+    elif file_ext in ['.png', '.jpg', '.jpeg']:
+        # Call decryption logic in img.py
+        from services.img import decrypt_image
+        decrypted_image_path = decrypt_image(encrypted_path, json_path, secret_key)
+        decrypted_image_name = os.path.basename(decrypted_image_path)
+        return render_template('result.html', 
+                             decrypted_image_name=decrypted_image_name,
+                             decrypted_image_path=decrypted_image_path,
+                             original_file=encrypted_filename,
+                             is_decrypted=True)
+    else:
+        return f'Unsupported file format for decryption: {file_ext}'
 
 if __name__ == '__main__':
     app.run(debug=True)

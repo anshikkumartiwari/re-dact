@@ -87,6 +87,8 @@ def decrypt_region(image_path, x, y, w, h, key, output_path):
     return encrypt_region(image_path, x, y, w, h, key, output_path) 
 
 def process_image(file_path, redact_ocr, redact_meta, redact_face, redact_license_plate, redact_signature, redact_nsfw, is_document):
+    import json
+    
     if redact_meta:
         no_metadata_path = os.path.splitext(file_path)[0] + '_no_metadata' + os.path.splitext(file_path)[1]
         remove_metadata(file_path, no_metadata_path)
@@ -140,4 +142,69 @@ def process_image(file_path, redact_ocr, redact_meta, redact_face, redact_licens
             temp_path = out_path
     else:
         cv2.imwrite(final_output_path, image)
+    
+    # Create detection log JSON file for single image processing
+    original_filename = os.path.basename(file_path)
+    json_filename = os.path.splitext(original_filename)[0] + '.json'
+    json_path = os.path.join('static', 'uploads', json_filename)
+    
+    # Create detection log with image reference
+    detection_log = []
+    for region in region_info:
+        detection_log.append({
+            "image": original_filename,
+            "region": region["region"],
+            "category": region["category"]
+        })
+    
+    # Write detection log JSON file
+    os.makedirs(os.path.dirname(json_path), exist_ok=True)
+    with open(json_path, 'w', encoding='utf-8') as jf:
+        json.dump(detection_log, jf, indent=2)
+    
     return final_output_path, region_info
+
+def decrypt_image(image_path, json_path, secret_key):
+    """
+    Decrypts a redacted image using the provided JSON log and secret key.
+    Returns the path to the decrypted image.
+    """
+    import json
+    import tempfile
+    
+    # Load JSON log
+    with open(json_path, 'r', encoding='utf-8') as jf:
+        detection_log = json.load(jf)
+    
+    # If no regions to decrypt, return original image
+    if not detection_log:
+        return image_path
+    
+    # Start with the redacted image
+    temp_path = image_path
+    
+    # Apply decryption for each region
+    for idx, entry in enumerate(detection_log):
+        region = entry['region']
+        x = int(region['x'])
+        y = int(region['y'])
+        w = int(region['width'])
+        h = int(region['height'])
+        
+        # Create output path for decrypted image
+        if idx == len(detection_log) - 1:
+            # Final decrypted image
+            base_name = os.path.splitext(os.path.basename(image_path))[0]
+            ext = os.path.splitext(image_path)[1]
+            output_path = os.path.join('static', 'uploads', f"{base_name}_decrypted{ext}")
+        else:
+            # Intermediate decrypted image
+            base_name = os.path.splitext(os.path.basename(image_path))[0]
+            ext = os.path.splitext(image_path)[1]
+            output_path = os.path.join('static', 'uploads', f"{base_name}_dec_{idx}{ext}")
+        
+        # Decrypt the region
+        decrypt_region(temp_path, x, y, w, h, secret_key, output_path)
+        temp_path = output_path
+    
+    return temp_path

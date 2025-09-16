@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Redaction Tool</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/logo.png') }}">
+    <title>Redaction Tool</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,27 +21,12 @@
     </header>
     
     <div class="container">
-<<<<<<< HEAD
         <button id="show-decrypt-btn" class="submit-btn" style="margin-bottom: 20px;">Decrypt Redacted Document</button>
         <form id="redaction-form" action="/upload" method="post" enctype="multipart/form-data" class="redaction-form">
-=======
-        <form action="/upload" method="post" enctype="multipart/form-data" class="redaction-form">
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
             <div class="form-group">
                 <label for="file" class="input-label">Choose file:</label>
                 <input type="file" id="file" name="file" class="file-input" required>
             </div>
-<<<<<<< HEAD
-=======
-            
-            <div class="form-group">
-                <label for="sensitivity" class="input-label">Redaction Sensitivity:</label>
-                <div class="range-wrapper">
-                    <input type="range" id="sensitivity" name="sensitivity" min="0" max="100" value="50" oninput="updateSliderValue(this.value)" class="range-input">
-                    <span id="sliderValue" class="slider-value">50</span>
-                </div>
-            </div>
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
 
             <div class="form-group checkbox-group">
                 <label for="doc_check" class="input-label"><i class="fas fa-file-alt"></i> Is it a document?</label>
@@ -81,11 +67,10 @@
                 <input type="submit" value="Redact" class="submit-btn">
             </div>
         </form>
-<<<<<<< HEAD
         <form id="decryption-form" action="/decrypt" method="post" enctype="multipart/form-data" class="redaction-form" style="display:none;">
             <div class="form-group">
-                <label for="docx_file" class="input-label">Upload Redacted DOCX File:</label>
-                <input type="file" id="docx_file" name="docx_file" class="file-input" accept=".docx" required>
+                <label for="encrypted_file" class="input-label">Upload Redacted File (DOCX/Image):</label>
+                <input type="file" id="encrypted_file" name="encrypted_file" class="file-input" accept=".docx,.png,.jpg,.jpeg" required>
             </div>
             <div class="form-group">
                 <label for="json_file" class="input-label">Upload Detection Log (JSON):</label>
@@ -108,21 +93,9 @@
             return false;
         };
     </script>
-=======
-    </div>
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
 
     <footer class="footer">
         <p>&copy; 2025 Text Redaction Tool. All rights reserved.</p>
     </footer>
-<<<<<<< HEAD
-=======
-
-    <script>
-        function updateSliderValue(value) {
-            document.getElementById('sliderValue').innerText = value;
-        }
-    </script>
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
 </body>
 </html>

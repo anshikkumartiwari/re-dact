@@ -64,9 +64,5 @@ def redact_patterns(text):
     text = redact_ifsc_codes(text)
     text = redact_upi_ids(text)
     text = redact_email_addresses(text)
-<<<<<<< HEAD
     return text
 
-=======
-    return text
->>>>>>> 1d9e9dad04fbdda5373b0cc55ac7bbf063c66a89
